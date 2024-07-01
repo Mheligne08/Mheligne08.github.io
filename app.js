@@ -59,3 +59,4 @@ qty1.addEventListener("keyup", addOrder);
 qty2.addEventListener("keyup", addOrder);
 qty3.addEventListener("keyup", addOrder);
 cashInput.addEventListener("input", calculateChange);
+        
