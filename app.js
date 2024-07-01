@@ -34,6 +34,7 @@ function addOrder() {
     updateTotal(); // Update total after adding orders
 }
 
+
 function updateTotal() {
     var total = 0;
 
@@ -43,9 +44,9 @@ function updateTotal() {
     total += parseFloat(qty4.value) * parseFloat(price4.textContent);
     total += parseFloat(qty5.value) * parseFloat(price5.textContent);
     total += parseFloat(qty6.value) * parseFloat(price6.textContent);
-
-    console.log("Total:", total); // Add this line for debugging
-
+    
+    
+    
     totalInput.value = total.toFixed(2); // Update total input field
     calculateChange(); // Calculate change after updating total
 }
@@ -68,4 +69,5 @@ qty3.addEventListener("keyup", addOrder);
 qty4.addEventListener("keyup", addOrder);
 qty5.addEventListener("keyup", addOrder);
 qty6.addEventListener("keyup", addOrder);
-cashInput.addEventListener("input", calculateChange);ayusin mo mga mga errors nito
+cashInput.addEventListener("input", calculateChange);
+fix the errors
