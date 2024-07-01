@@ -51,6 +51,12 @@ function calculateChange() {
         var change = cash - total;
         changeInput.value = change.toFixed(2); // Update change input field
     } else {
+        if (isNaN(total)) {
+            totalInput.value = "";
+        }
+        if (isNaN(cash)) {
+            cashInput.value = "";
+        }
         changeInput.value = "";
     }
 }
