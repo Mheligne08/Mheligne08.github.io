@@ -47,19 +47,24 @@ function calculateChange() {
     var total = parseFloat(totalInput.value);
     var cash = parseFloat(cashInput.value);
 
-    if (!isNaN(total) && !isNaN(cash)) {
-        var change = cash - total;
-        changeInput.value = change.toFixed(2); // Update change input field
-    } else {
+    if (isNaN(total) || isNaN(cash)) {
         if (isNaN(total)) {
-            totalInput.value = "";
+            totalInput.value = "Invalid Input";
         }
         if (isNaN(cash)) {
-            cashInput.value = "";
+            cashInput.value = "Invalid Input";
         }
         changeInput.value = "";
+    } else {
+        var change = cash - total;
+        if (isNaN(change)) {
+            changeInput.value = "Invalid Input";
+        } else {
+            changeInput.value = change.toFixed(2); // Update change input field
+        }
     }
 }
+
 
 qty1.addEventListener("keyup", addOrder);
 qty2.addEventListener("keyup", addOrder);
