@@ -1,73 +1,51 @@
-var product1 = document.getElementById("product1");
-var qty1 = document.getElementById("qty1");
-var price1 = document.getElementById("price1");
-var product2 = document.getElementById("product2");
-var qty2 = document.getElementById("qty2");
-var price2 = document.getElementById("price2");
-var qty3 = document.getElementById("qty3");
-var price3 = document.getElementById("price3");
-var carts = document.getElementById("carts");
-var totalInput = document.getElementById("total");
-var cashInput = document.getElementById("cash");
-var changeInput = document.getElementById("change");
+function buyProducts() {
+    // Get quantity inputs
+    var qty1 = document.getElementById("qty1").value;
+    var qty2 = document.getElementById("qty2").value;
+    var qty3 = document.getElementById("qty3").value;
+    var qty4 = document.getElementById("qty4").value;
+    var qty5 = document.getElementById("qty5").value;
 
-function addOrder() {
-    carts.textContent = "";
+    // Get prices
+    var price1 = parseFloat(document.getElementById("price1").innerHTML);
+    var price2 = parseFloat(document.getElementById("price2").innerHTML);
+    var price3 = parseFloat(document.getElementById("price3").innerHTML);
+    var price4 = parseFloat(document.getElementById("price4").innerHTML);
+    var price5 = parseFloat(document.getElementById("price5").innerHTML);
 
-    if (qty1 && parseFloat(qty1.value) > 0 && product1 && price1) {
-        var order1 = qty1.value.toString() + " pcs x " + product1.textContent + " - Php " + (parseFloat(qty1.value) * parseFloat(price1.textContent)).toFixed(2) + "\n";
-        carts.textContent += order1;
-    }
+    // Calculate total
+    var total = qty1 * price1 + qty2 * price2 + qty3 * price3 + qty4 * price4 + qty5 * price5;
 
-    if (qty2 && parseFloat(qty2.value) > 0 && product2 && price2) {
-        var order2 = qty2.value.toString() + " pcs x " + product2.textContent + " - Php " + (parseFloat(qty2.value) * parseFloat(price2.textContent)).toFixed(2) + "\n";
-        carts.textContent += order2;
-    }
-    
-    if (qty3 && parseFloat(qty3.value) > 0 && product3 && price3) {
-        var order3 = qty3.value.toString() + " pcs x " + product3.textContent + " - Php " + (parseFloat(qty3.value) * parseFloat(price3.textContent)).toFixed(2) + "\n";
-        carts.textContent += order3;
-    }
+    // Display total
+    document.getElementById("total").value = total.toFixed(2);
 
-    // Add similar checks for qty4, qty5, qty6 if needed
-    
-    updateTotal(); // Update total after adding orders
-}
-
-
-function updateTotal() {
-    var total = 0;
-
-    total += parseFloat(qty1.value) * parseFloat(price1.textContent);
-    total += parseFloat(qty2.value) * parseFloat(price2.textContent);
-    total += parseFloat(qty3.value) * parseFloat(price3.textContent);
-    total += parseFloat(qty4.value) * parseFloat(price4.textContent);
-    total += parseFloat(qty5.value) * parseFloat(price5.textContent);
-    total += parseFloat(qty6.value) * parseFloat(price6.textContent);
-    
-    
-    
-    totalInput.value = total.toFixed(2); // Update total input field
-    calculateChange(); // Calculate change after updating total
-}
-
-function calculateChange() {
-    var total = parseFloat(totalInput.value);
-    var cash = parseFloat(cashInput.value);
-
-    if (!isNaN(total) && !isNaN(cash)) {
-        var change = cash - total;
-        changeInput.value = change.toFixed(2); // Update change input field
+    // Calculate change
+    var cashTendered = parseFloat(document.getElementById("cash").value);
+    var change = cashTendered - total;
+    if (change >= 0) {
+        document.getElementById("change").value = change.toFixed(2);
     } else {
-        changeInput.value = "";
+        alert("Insufficient cash tendered!");
     }
-}
 
-qty1.addEventListener("keyup", addOrder);
-qty2.addEventListener("keyup", addOrder);
-qty3.addEventListener("keyup", addOrder);
-qty4.addEventListener("keyup", addOrder);
-qty5.addEventListener("keyup", addOrder);
-qty6.addEventListener("keyup", addOrder);
-cashInput.addEventListener("input", calculateChange);
-fix the errors
+    // Generate order summary
+    var orderSummary = "";
+    if (qty1 > 0) {
+        orderSummary += "IPhone 11 ProMax x" + qty1 + "\n";
+    }
+    if (qty2 > 0) {
+        orderSummary += "IPhone XR x" + qty2 + "\n";
+    }
+    if (qty3 > 0) {
+        orderSummary += "IPhone 13 ProMax x" + qty3 + "\n";
+    }
+    if (qty4 > 0) {
+        orderSummary += "IPhone 14 ProMax x" + qty4 + "\n";
+    }
+    if (qty5 > 0) {
+        orderSummary += "IPhone 15 ProMax x" + qty5 + "\n";
+    }
+
+    // Display order summary
+    document.getElementById("carts").value = orderSummary;
+            }
