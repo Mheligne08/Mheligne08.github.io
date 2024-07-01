@@ -14,26 +14,25 @@ var changeInput = document.getElementById("change");
 function addOrder() {
     carts.textContent = "";
 
-    if (parseFloat(qty1.value) > 0) {
+    if (qty1 && parseFloat(qty1.value) > 0 && product1 && price1) {
         var order1 = qty1.value.toString() + " pcs x " + product1.textContent + " - Php " + (parseFloat(qty1.value) * parseFloat(price1.textContent)).toFixed(2) + "\n";
         carts.textContent += order1;
     }
 
-    if (parseFloat(qty2.value) > 0) {
+    if (qty2 && parseFloat(qty2.value) > 0 && product2 && price2) {
         var order2 = qty2.value.toString() + " pcs x " + product2.textContent + " - Php " + (parseFloat(qty2.value) * parseFloat(price2.textContent)).toFixed(2) + "\n";
         carts.textContent += order2;
     }
     
-    if (parseFloat(qty3.value) > 0) {
+    if (qty3 && parseFloat(qty3.value) > 0 && product3 && price3) {
         var order3 = qty3.value.toString() + " pcs x " + product3.textContent + " - Php " + (parseFloat(qty3.value) * parseFloat(price3.textContent)).toFixed(2) + "\n";
         carts.textContent += order3;
     }
 
-    // Call updateTotal after adding items to the cart
-    updateTotal();
+    // Add similar checks for qty4, qty5, qty6 if needed
+    
+    updateTotal(); // Update total after adding orders
 }
-
-
 
 function updateTotal() {
     var total = 0;
