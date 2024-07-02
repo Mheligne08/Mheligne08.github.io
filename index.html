@@ -15,15 +15,9 @@
             object-fit: cover;
         }
         .order-summary {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 300px;
-            height: 100%;
             background-color: #fff;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             padding: 20px;
-            overflow-y: auto;
         }
         .order-summary h4 {
             margin-top: 0;
@@ -32,10 +26,16 @@
             display: flex;
             justify-content: space-between;
         }
+        .order-container {
+            height: 100vh;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row mb-4">
             <div class="col-12 text-center">
                 <h2>🍔 Food Delivery 🍔</h2>
@@ -80,16 +80,18 @@
                 </div>
             </div>
             <!-- Order Summary -->
-            <div class="col-md-4 order-summary">
-                <h4>Order Summary</h4>
-                <div id="orderItems"></div>
-                <hr />
-                <div class="order-item">
-                    <span>Total</span>
-                    <span id="totalAmount">₱0.00</span>
+            <div class="col-md-4">
+                <div class="order-summary order-container">
+                    <h4>Order Summary</h4>
+                    <div id="orderItems"></div>
+                    <hr />
+                    <div class="order-item">
+                        <span>Total</span>
+                        <span id="totalAmount">₱0.00</span>
+                    </div>
+                    <hr />
+                    <button class="btn btn-success w-100">Checkout</button>
                 </div>
-                <hr />
-                <button class="btn btn-success w-100">Checkout</button>
             </div>
         </div>
     </div>
