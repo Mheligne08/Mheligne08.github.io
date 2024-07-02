@@ -27,3 +27,16 @@ function updateOrderSummary() {
 
     document.getElementById('totalAmount').textContent = `₱${totalAmount}.00`;
 }
+
+function checkout() {
+    if (order.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    // Display a thank you message
+    alert("Thanks for your orders!");
+    // Clear the order
+    order = [];
+    // Update the order summary
+    updateOrderSummary();
+}
