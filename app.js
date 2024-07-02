@@ -33,8 +33,9 @@ function checkout() {
         alert("Your cart is empty!");
         return;
     }
-    // Display a thank you message
-    alert("Thanks for your orders!");
+    // Show checkout modal
+    const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+    checkoutModal.show();
     // Clear the order
     order = [];
     // Update the order summary
