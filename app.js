@@ -1,67 +1,60 @@
-let order = [];
-
-function addToOrder(name, price) {
-    const item = order.find(item => item.name === name);
-    if (item) {
-        item.quantity += 1;
-    } else {
-        order.push({ name, price, quantity: 1 });
-    }
-    updateOrderSummary();
-}
-
-function updateOrderSummary() {
-    const orderItemsContainer = document.getElementById('orderItems');
-    orderItemsContainer.innerHTML = '';
-    let totalAmount = 0;
-
-    order.forEach(item => {
-        totalAmount += item.price * item.quantity;
-        orderItemsContainer.innerHTML += `
-            <div class="order-item">
-                <span>${item.name} x${item.quantity}</span>
-                <span>₱${item.price * item.quantity}.00</span>
-            </div>
-        `;
-    });
-
-    document.getElementById('totalAmount').textContent = `₱${totalAmount}.00`;
-}
-
-function checkout() {
-    if (order.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
-    // Show checkout modal
-    const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-    checkoutModal.show();
-    // Clear the order
-    order = [];
-    // Update the order summary
-    updateOrderSummary();
-}
-// Function to update the order summary
-function updateOrder() {
-    // Your existing code for updating the order summary
+// Function to add items to order summary
+function addToOrder(itemName, itemPrice) {
+    var orderItems = document.getElementById('orderItems');
+    var totalAmountElement = document.getElementById('totalAmount');
+    
+    // Create new order item element
+    var item = document.createElement('div');
+    item.classList.add('order-item');
+    item.innerHTML = `
+        <span>${itemName}</span>
+        <span>₱${itemPrice.toFixed(2)}</span>
+    `;
+    
+    // Append item to orderItems container
+    orderItems.appendChild(item);
+    
+    // Update total amount
+    var currentTotal = parseFloat(totalAmountElement.textContent.replace('₱', ''));
+    var newTotal = currentTotal + itemPrice;
+    totalAmountElement.textContent = `₱${newTotal.toFixed(2)}`;
 }
 
 // Function to calculate change
 function calculateChange() {
-    let totalAmount = parseFloat(document.getElementById('totalAmount').innerText.replace('₱', ''));
-    let cashTendered = parseFloat(document.getElementById('cash').value);
-    let change = cashTendered - totalAmount;
-
-    if (isNaN(change) || change < 0) {
-        document.getElementById('change').value = '';
-    } else {
-        document.getElementById('change').value = '₱' + change.toFixed(2);
-    }
+    var total = parseFloat(document.getElementById('totalAmount').textContent.replace('₱', ''));
+    var cashTendered = parseFloat(document.getElementById('cash').value);
+    var change = cashTendered - total;
+    document.getElementById('change').value = change.toFixed(2);
 }
 
-// Function to handle checkout
-function checkout() {
-    calculateChange();
-    $('#checkoutModal').modal('show');
+// Function to initialize products
+function initializeProducts() {
+    var products = [
+        { name: 'Whopper Ala Carte', price: 300 },
+        { name: 'Whopper Jr Burger', price: 200 },
+        { name: 'Fish\'n Crisp Burger', price: 250 }
+        // Add more products as needed
+    ];
+
+    var productList = document.getElementById('product-list');
+    products.forEach(function(product) {
+        var productCol = document.createElement('div');
+        productCol.classList.add('col-md-4');
+        productCol.innerHTML = `
+            <div class="card product-card">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">Price: ₱${product.price.toFixed(2)}</p>
+                    <button class="btn btn-primary" onclick="addToOrder('${product.name}', ${product.price})">Add to Cart</button>
+                </div>
+            </div>
+        `;
+        productList.appendChild(productCol);
+    });
 }
-    
+
+// Initialize products when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeProducts();
+});
