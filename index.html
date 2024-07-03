@@ -25,6 +25,7 @@
         .order-item {
             display: flex;
             justify-content: space-between;
+            align-items: center; /* Align items vertically */
         }
         .order-container {
             height: 100vh;
@@ -97,13 +98,17 @@
                     <div class="order-item">
                         <span>Total</span>
                         <span id="totalAmount">₱0.00</span>
-                        <input type="number" class="form-control mb-3" id="cash" placeholder="Cash Tendered" oninput="calculateChange()"/>
-                        <input type="text" class="form-control border-0 mb-3" id="change" readonly placeholder="Change"/>
                     </div>
+                    <div class="order-item">
+                        <span>Cash Tendered</span>
+                        <input type="number" class="form-control mb-3" id="cash" placeholder="Enter amount" oninput="calculateChange()"/>
+                    </div>
+                    <div class="order-item">
+                        <span>Change</span>
+                        <input type="text" class="form-control border-0 mb-3 text-end" id="change" readonly placeholder="Change"/>
                     </div>
                     <hr />
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout</button>
-               
                 </div>
             </div>
         </div>
@@ -134,6 +139,26 @@
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script>
+        // Function to add items to order summary
+        function addToOrder(itemName, itemPrice) {
+            // Logic to add items to order summary
+        }
+
+        // Function to calculate change
+        function calculateChange() {
+            // Get the total amount and cash tendered values
+            var total = parseFloat(document.getElementById('totalAmount').textContent.replace('₱', '').trim());
+            var cashTendered = parseFloat(document.getElementById('cash').value);
+
+            // Calculate change
+            var change = cashTendered - total;
+
+            // Update the change field with formatted change value
+            document.getElementById('change').value = change.toFixed(2);
+        }
+    </script>
 </body>
-</html>
+                        </html>
+
+                    
