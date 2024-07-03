@@ -1,37 +1,22 @@
-let orderItems = [];
-        let totalAmount = 0;
+let total = 0;
 
-        function addToOrder(itemName, itemPrice) {
-            // Add item to the order array
-            orderItems.push({ name: itemName, price: itemPrice });
+function addToCart(price) {
+    total += price;
+    document.getElementById('total').textContent = total.toFixed(2);
+    calculateChange();
+}
 
-            // Update the total amount
-            totalAmount += itemPrice;
+function calculateChange() {
+    const cash = parseFloat(document.getElementById('cash').value) || 0;
+    const change = cash - total;
+    document.getElementById('change').textContent = change.toFixed(2);
+}
 
-            // Update the order summary UI
-            updateOrderSummary();
-        }
-
-        function updateOrderSummary() {
-            const orderItemsContainer = document.getElementById('orderItems');
-            orderItemsContainer.innerHTML = '';
-
-            orderItems.forEach(item => {
-                const orderItemDiv = document.createElement('div');
-                orderItemDiv.classList.add('order-item');
-                orderItemDiv.innerHTML = `<span>${item.name}</span><span>₱${item.price.toFixed(2)}</span>`;
-                orderItemsContainer.appendChild(orderItemDiv);
-            });
-
-            // Update total amount in the UI
-            document.getElementById('totalAmount').innerText = `₱${totalAmount.toFixed(2)}`;
-        }
-
-        function calculateChange() {
-            const cash = parseFloat(document.getElementById('cash').value) || 0;
-            const change = cash - totalAmount;
-            document.getElementById('change').value = `₱${change.toFixed(2)}`;
-        }
-    </script>
-</body>
-</html>
+function checkout() {
+    alert('Thank you for your purchase! Your total is ₱' + total.toFixed(2));
+    // Reset total and fields
+    total = 0;
+    document.getElementById('total').textContent = '0.00';
+    document.getElementById('cash').value = '';
+    document.getElementById('change').textContent = '0.00';
+}
