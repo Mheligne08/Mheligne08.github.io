@@ -41,3 +41,27 @@ function checkout() {
     // Update the order summary
     updateOrderSummary();
 }
+// Function to update the order summary
+function updateOrder() {
+    // Your existing code for updating the order summary
+}
+
+// Function to calculate change
+function calculateChange() {
+    let totalAmount = parseFloat(document.getElementById('totalAmount').innerText.replace('₱', ''));
+    let cashTendered = parseFloat(document.getElementById('cash').value);
+    let change = cashTendered - totalAmount;
+
+    if (isNaN(change) || change < 0) {
+        document.getElementById('change').value = '';
+    } else {
+        document.getElementById('change').value = '₱' + change.toFixed(2);
+    }
+}
+
+// Function to handle checkout
+function checkout() {
+    calculateChange();
+    $('#checkoutModal').modal('show');
+}
+    
