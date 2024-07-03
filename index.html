@@ -97,9 +97,13 @@
                     <div class="order-item">
                         <span>Total</span>
                         <span id="totalAmount">₱0.00</span>
+                        <input type="number" class="form-control mb-3" id="cash" placeholder="Cash Tendered" oninput="calculateChange()"/>
+                        <input type="text" class="form-control border-0 mb-3" id="change" readonly placeholder="Change"/>
+                    </div>
                     </div>
                     <hr />
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout</button>
+               
                 </div>
             </div>
         </div>
