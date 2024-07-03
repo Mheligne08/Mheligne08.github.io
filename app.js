@@ -5,7 +5,7 @@ function addToOrder(itemName, itemPrice) {
     
     // Create new order item element
     var item = document.createElement('div');
-    item.classList.add('order-item');
+    item.classList.add('order-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2');
     item.innerHTML = `
         <span>${itemName}</span>
         <span>₱${itemPrice.toFixed(2)}</span>
@@ -43,18 +43,8 @@ function initializeProducts() {
         productCol.classList.add('col-md-4');
         productCol.innerHTML = `
             <div class="card product-card">
+                <img src="${product.name.replace(/\s/g, '')}.png" class="card-img-top" alt="${product.name}">
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text">Price: ₱${product.price.toFixed(2)}</p>
-                    <button class="btn btn-primary" onclick="addToOrder('${product.name}', ${product.price})">Add to Cart</button>
-                </div>
-            </div>
-        `;
-        productList.appendChild(productCol);
-    });
-}
-
-// Initialize products when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    initializeProducts();
-});
+                    <p class="card-text">Price: ₱${product.price.
+                                                   
